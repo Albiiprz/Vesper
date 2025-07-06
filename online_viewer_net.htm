@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta para Thor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: url('https://i.imgur.com/ggXm9IE.jpeg') no-repeat top center;
+      background-size: cover;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      line-height: 1.8;
+      color: #2d160a;
+      overflow-x: hidden;
+    }
+
+    .bienvenida {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .bienvenida button {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      padding: 10px 20px;
+      background: #f3e3c3;
+      border: none;
+      border-radius: 12px;
+      color: #2d160a;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .texto {
+      max-width: 800px;
+      padding: 80px 60px;
+      margin: 0 auto;
+      white-space: pre-wrap;
+      display: none;
+    }
+
+    .texto span {
+      opacity: 0;
+      animation: aparecer 3.24s forwards;
+      text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.25);
+    }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+      }
+    }
+
+    iframe {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pantalla de inicio -->
+  <div class="bienvenida" id="pantallaInicio">
+    <h1>¿Estás listo para leerla?</h1>
+    <button onclick="iniciarCarta()">Leer carta</button>
+  </div>
+
+  <!-- YouTube oculto -->
+  <div id="playerContainer"></div>
+
+  <!-- Carta -->
+  <div class="texto" id="texto"></div>
+
+  <script>
+    const contenido = `Thor,
+
+Si estás leyendo esto es porque ya no estoy, o algo así.
+
+No quiero hacer esto más dramático de lo que ya debe estar siendo.
+
+Solo quería que supieras que contigo me olvidé de la maldición por un rato.
+Me olvidé de todo lo que cargaba y solo estaba ahí, contigo, como si pudiera ser una chica normal.
+
+Te quise, aunque no lo pareciera. A mi manera. Y creo que eso fue lo más cerca que estuve de saber lo que es estar enamorada.
+Querer que la otra persona esté bien aunque tú no lo estés. Llorar por no saber cómo actuar. Pensar doscientas veces qué decirte. Abrazarte intentando que no me temblaran las manos.
+
+Ahí… ahí lo sentía.
+
+No quiero que te sientas mal por nada de esto. Ni que pienses que fue culpa tuya.
+
+TODO ha sido decisión mía. Eres fuerte, inteligente y tu corazón ya no está roto. Al menos yo creo que no.
+
+Quiero que salgas de esto. Nadie se va a acordar y que me encierren solo acabaría matándonos a todos de otra forma.
+
+Así que vive. Haz cosas que te hagan feliz. Ríete mucho. Haz tonterías. Quiérete, y a quien te quiera.
+
+Acuérdate de mí riéndome. Como la noche en la cueva.
+
+Y si algún día todo se pone difícil, estaré ahí. Solo tienes que fijarte, y te darás cuenta.
+
+—Vesper`;
+
+    function iniciarCarta() {
+      document.getElementById('pantallaInicio').style.display = 'none';
+      const texto = document.getElementById("texto");
+      texto.style.display = "block";
+
+      [...contenido].forEach((letra, i) => {
+        const span = document.createElement("span");
+        span.textContent = letra;
+        span.style.animationDelay = `${i * 0.11}s`;
+        texto.appendChild(span);
+      });
+
+      // Insertar reproductor YouTube
+      const contenedor = document.getElementById("playerContainer");
+      contenedor.innerHTML = `
+        <iframe
+          src="https://www.youtube.com/embed/m-hmwoPwbVA?autoplay=1&loop=1&playlist=m-hmwoPwbVA&controls=0&modestbranding=1&showinfo=0"
+          allow="autoplay"
+          allowfullscreen
+          width="0" height="0">
+        </iframe>
+      `;
+    }
+  </script>
+
+</body>
+</html>
