@@ -28,16 +28,24 @@
       z-index: 10;
     }
 
-    .bienvenida button {
+    .bienvenida input, .bienvenida button {
       font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
+      font-size: 1.8rem;
       padding: 10px 20px;
-      background: #f3e3c3;
+      margin-top: 15px;
+      border-radius: 10px;
       border: none;
-      border-radius: 12px;
+    }
+
+    .bienvenida input {
+      background: #fff;
+      color: #2d160a;
+    }
+
+    .bienvenida button {
+      background: #f3e3c3;
       color: #2d160a;
       cursor: pointer;
-      margin-top: 20px;
     }
 
     .texto {
@@ -67,10 +75,11 @@
 </head>
 <body>
 
-  <!-- Pantalla de inicio -->
+  <!-- Pantalla con contraseña -->
   <div class="bienvenida" id="pantallaInicio">
-    <h1>¿Estás listo para leerla?</h1>
-    <button onclick="iniciarCarta()">Leer carta</button>
+    <h1>Introduce la contraseña para leer la carta</h1>
+    <input type="password" id="clave" placeholder="Contraseña...">
+    <button onclick="validarAcceso()">Aceptar</button>
   </div>
 
   <!-- YouTube oculto -->
@@ -107,6 +116,15 @@ Acuérdate de mí riéndome. Como la noche en la cueva.
 Y si algún día todo se pone difícil, estaré ahí. Solo tienes que fijarte, y te darás cuenta.
 
 —Vesper`;
+
+    function validarAcceso() {
+      const clave = document.getElementById("clave").value.trim().toLowerCase();
+      if (clave === "cueva") {
+        iniciarCarta();
+      } else {
+        alert("Contraseña incorrecta. Intenta otra vez.");
+      }
+    }
 
     function iniciarCarta() {
       document.getElementById('pantallaInicio').style.display = 'none';
